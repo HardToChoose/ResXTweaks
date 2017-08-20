@@ -4,7 +4,6 @@ using Microsoft.VisualStudio.Shell.FindAllReferences;
 using Microsoft.VisualStudio.Shell.TableManager;
 
 using System.Collections.Concurrent;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml;
@@ -14,9 +13,6 @@ namespace ResXTweaks
 {
     internal class ResourceSearchResultsDataSource : TableDataSource<ResourceSearchResult>
     {
-        private static readonly XName ResourceEntryTag = XName.Get("data");
-        private static readonly XName ResourceEntryNameAttr = XName.Get("name");
-
         private readonly Document _document;
         private readonly ISymbol _designerPropertySymbol;
 
@@ -39,16 +35,11 @@ namespace ResXTweaks
             SyntaxTree syntaxTree = designerClass.Locations.First().SourceTree;
             string filePath = syntaxTree?.FilePath;
 
-            var resxFiles = Directory.GetFiles(Path.GetDirectoryName(filePath), $"{designerClass.Name}.*resx");
-
-            foreach (string resx in resxFiles)
+            foreach (string resx in DocumentHelper.GetRelatedResXFiles(filePath, designerClass.Name))
             {
-                var document = XDocument.Load(resx, LoadOptions.SetLineInfo);
-                var dataElement = document
-                    .Descendants(ResourceEntryTag)
-                    .FirstOrDefault(data => data.Attribute(ResourceEntryNameAttr)?.Value == resourceName);
-
+                var dataElement = ResXHelper.FindResourceEntryElement(resx, resourceName);
                 var lineInfo = dataElement as IXmlLineInfo;
+
                 if (lineInfo != null && lineInfo.HasLineInfo())
                     result.TryAdd(CreateFromXmlElement(resx, dataElement));
             }
@@ -62,12 +53,11 @@ namespace ResXTweaks
 
             int start = sourceText.Lines[lineLocation.StartLinePosition.Line].Start;
             int end = sourceText.Lines[lineLocation.EndLinePosition.Line].End;
-            string definition = sourceText.GetSubText(TextSpan.FromBounds(start, end)).ToString();
+            string code = sourceText.GetSubText(TextSpan.FromBounds(start, end)).ToString();
 
             return new ResourceSearchResult(location.SourceTree.FilePath)
             {
-                Definition = TrimWhiteCharacters(definition),
-                Code = symbol.Name,
+                Code = TrimWhiteCharacters(code),
                 Column = lineLocation.StartLinePosition.Character,
                 Line = lineLocation.StartLinePosition.Line,
                 Project = _document.Project.Name

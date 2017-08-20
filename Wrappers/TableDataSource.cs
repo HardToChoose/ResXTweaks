@@ -68,7 +68,7 @@ namespace ResXTweaks
                 }
                 catch (Exception ex)
                 {
-
+                    ErrorHandler.LogException(ex);
                 }
             }, cancellationToken);
         }

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h" />
+  <Extern href="vsshlids.h" />
+
+  <Commands package="guidResXTweaksPackage">
+    <Groups>
+      <Group guid="guidResXTweaksPackageCmdSet" id="SortResXCommandsGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_CODEWIN" />
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidResXTweaksPackageCmdSet" id="SortResXCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidResXTweaksPackageCmdSet" id="SortResXCommandsGroup" />
+        <Icon guid="guidImages" id="BmpSortResX" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
+        <Strings>
+          <ButtonText>SortCurrentResX</ButtonText>
+        </Strings>
+      </Button>
+      <Button guid="guidResXTweaksPackageCmdSet" id="SortRelatedResXCommandId" priority="0x0100" type="Button">
+        <Parent guid="guidResXTweaksPackageCmdSet" id="SortResXCommandsGroup" />
+        <Icon guid="guidImages" id="BmpSortResX" />
+        <CommandFlag>DynamicVisibility</CommandFlag>
+        <CommandFlag>TextChanges</CommandFlag>
+        <Strings>
+          <ButtonText>SortAllRelatedResX</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="guidImages" href="Resources\SortByAlphabet.png" usedList="BmpSortResX" />
+    </Bitmaps>
+  </Commands>
+  
+  <CommandPlacements>
+    <CommandPlacement guid="guidResXTweaksPackageCmdSet" id="SortResXCommandsGroup" priority="0x105">
+      <Parent guid="guidSHLMainMenu" id="IDM_VS_CTXT_ITEMNODE" />
+    </CommandPlacement>
+  </CommandPlacements>
+
+  <Symbols>
+    <GuidSymbol name="guidResXTweaksPackage" value="{a46acaf5-0bba-4ec6-a758-9c04ec17d384}" />
+
+    <GuidSymbol name="guidResXTweaksPackageCmdSet" value="{7de2cdae-f945-4bd2-8d7c-7aaba43eb8bb}">
+      <IDSymbol name="SortResXCommandsGroup" value="0x1020" />
+      <IDSymbol name="SortResXCommandId" value="0x0100" />
+      <IDSymbol name="SortRelatedResXCommandId" value="0x0200" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidImages" value="{c39e6846-fca9-4bea-8eca-d6cc677a2551}">
+      <IDSymbol name="BmpSortResX" value="1" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

@@ -30,7 +30,7 @@ namespace ResXTweaks
             };
 
             IOleCommandTarget nextTarget;
-            var filter = new CommandFilter(commandContext);
+            var filter = new TextViewCommandFilter(commandContext);
 
             if (textViewAdapter.AddCommandFilter(filter, out nextTarget) == VSConstants.S_OK)
             {

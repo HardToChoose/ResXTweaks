@@ -4,7 +4,7 @@
     <Identity Id="ResXTweaks.2b366364-9abc-4069-b98f-3cacb60c4761" Version="1.0" Language="en-US" Publisher="Anatolii Boiko" />
     <DisplayName>ResXTweaks</DisplayName>
     <Description xml:space="preserve">Makes navigation between resource definitions easier</Description>
-    <License>Whatever</License>
+    <License>LICENSE.txt</License>
     <Tags>c#, vbasic, resx, resource, navigation, localization</Tags>
   </Metadata>
   <Installation>

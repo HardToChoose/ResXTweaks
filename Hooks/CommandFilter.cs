@@ -5,12 +5,12 @@ using System;
 
 namespace ResXTweaks
 {
-    internal class CommandFilter : IOleCommandTarget
+    internal class TextViewCommandFilter : IOleCommandTarget
     {
         private readonly CommandContext _context;
         private IOleCommandTarget _nextCommandTarget;
 
-        public CommandFilter(CommandContext context)
+        public TextViewCommandFilter(CommandContext context)
         {
             _context = context;
         }
