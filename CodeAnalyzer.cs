@@ -50,9 +50,21 @@ namespace ResXTweaks
 
         private bool IsDesignerType(INamedTypeSymbol typeSymbol)
         {
-            return typeSymbol != null &&
-                   typeSymbol.BaseType.SpecialType == SpecialType.System_Object &&
-                   typeSymbol.Locations.FirstOrDefault()?.SourceTree?.FilePath?.EndsWith(".Designer.cs") == true;
+            if (typeSymbol != null &&
+                typeSymbol.BaseType.SpecialType == SpecialType.System_Object)
+            {
+                var sourceTree = typeSymbol.Locations.FirstOrDefault()?.SourceTree;
+                if (sourceTree?.FilePath != null)
+                {
+                    var extension =
+                        (typeSymbol.Language == "C#") ? "cs" :
+                        (typeSymbol.Language == "Visual Basic") ? "vb" :
+                        throw new InvalidOperationException("Unexpected file extension!");
+
+                    return sourceTree.FilePath.ToLower().EndsWith($".designer.{extension}");
+                }
+            }
+            return false;
         }
     }
 }
