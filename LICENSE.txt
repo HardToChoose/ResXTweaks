@@ -1,4 +1,4 @@
-Do whatever you want with the source code.
+This software is distributed "as is", with no warranty expressed or implied, and no guarantee for accuracy or applicability to any purpose.
 
 Icons
 -----

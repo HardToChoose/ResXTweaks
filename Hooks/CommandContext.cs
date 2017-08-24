@@ -7,6 +7,6 @@ namespace ResXTweaks
     internal struct CommandContext
     {
         public IServiceProvider ServiceProvider;
-        public IWpfTextView WpfTextView ;
+        public IWpfTextView WpfTextView;
     }
 }

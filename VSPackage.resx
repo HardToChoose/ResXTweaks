@@ -133,7 +133,8 @@
   </data>
   <data name="112" xml:space="preserve">
     <value>Features:
-    1. Show all resource definitions from .resx files when invoking Go To Implementation command on designer class property under cursor.
+  1. Find resource entries from .resx files when invoking "Go To Implementation" on designer class property.
+  2. Allow sorting .resx file(s) via context menus in XML editor window and Solution Explorer.
     </value>
   </data>
   <data name="400" type="System.Resources.ResXFileRef, System.Windows.Forms">

@@ -15,11 +15,15 @@ namespace ResXTweaks
     [Export(typeof(IVsTextViewCreationListener))]
     public class Listener : IVsTextViewCreationListener
     {
+        #pragma warning disable 0649
+
         [Import(typeof(IVsEditorAdaptersFactoryService))]
         internal IVsEditorAdaptersFactoryService EditorFactory;
 
         [Import(typeof(SVsServiceProvider))]
         internal SVsServiceProvider ServiceProvider;
+
+        #pragma warning restore 0649
 
         void IVsTextViewCreationListener.VsTextViewCreated(IVsTextView textViewAdapter)
         {

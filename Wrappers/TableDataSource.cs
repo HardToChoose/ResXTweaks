@@ -13,23 +13,21 @@ namespace ResXTweaks
     internal abstract class TableDataSource<T> : ITableDataSource, ITableEntriesSnapshotFactory where T : TableEntry
     {
         private readonly IFindAllReferencesWindow _referencesWindow;
-        private readonly string _identifier;
-        private readonly string _name;
         protected readonly ConcurrentBag<T> _entries;
 
         public string SourceTypeIdentifier => typeof(T).FullName;
-        public string Identifier => _identifier;
-        public string DisplayName => _name;
+        public string Identifier { get; }
+        public string DisplayName { get; }
 
         public int CurrentVersionNumber => 0;
 
         protected abstract void InternalLoadData(IProducerConsumerCollection<T> result, CancellationToken cancellationToken);
 
-        public TableDataSource(string name, IFindAllReferencesWindow referencesWindow)
+        protected TableDataSource(string name, IFindAllReferencesWindow referencesWindow)
         {
             _referencesWindow = referencesWindow;
-            _name = name;
-            _identifier = string.Format("{0}_{1}", name, typeof(T).FullName);
+            DisplayName = name;
+            Identifier = string.Format("{0}_{1}", name, typeof(T).FullName);
             _entries = new ConcurrentBag<T>();
 
             referencesWindow.Manager.AddSource(this);
